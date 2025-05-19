@@ -40,4 +40,7 @@ foreach ($cartItems as $item) {
     echo '</div>';
 }
 echo '</div>';
-echo '<div style="margin-top:1.5rem;text-align:right;font-weight:600;color:#1e3799;font-size:1.1em;">Total: $'.number_format($total,2).'</div>'; 
+echo '<div style="margin-top:1.5rem;text-align:right;font-weight:600;color:#1e3799;font-size:1.1em;">Total: $'.number_format($total,2).'</div>';
+echo '<div style="margin-top:1rem;text-align:center;">';
+echo '<a href="checkout.php" style="display:inline-block;background:#1e3799;color:#fff;text-decoration:none;padding:12px 24px;border-radius:8px;font-weight:500;transition:background 0.3s ease;">Proceed to Checkout</a>';
+echo '</div>'; 
