@@ -17,7 +17,7 @@ if ($productId <= 0) {
     exit;
 }
 
-// Check if product is already in cart
+
 $sql = "SELECT id, quantity FROM cart WHERE userId = ? AND productId = ?";
 $stmt = mysqli_prepare($conn, $sql);
 mysqli_stmt_bind_param($stmt, 'ii', $userId, $productId);
@@ -25,19 +25,19 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
 if ($row = mysqli_fetch_assoc($result)) {
-    // Update quantity
+   
     $newQty = $row['quantity'] + 1;
     $update = mysqli_prepare($conn, "UPDATE cart SET quantity = ? WHERE id = ?");
     mysqli_stmt_bind_param($update, 'ii', $newQty, $row['id']);
     mysqli_stmt_execute($update);
 } else {
-    // Insert new cart item
+   
     $insert = mysqli_prepare($conn, "INSERT INTO cart (userId, productId, quantity) VALUES (?, ?, 1)");
     mysqli_stmt_bind_param($insert, 'ii', $userId, $productId);
     mysqli_stmt_execute($insert);
 }
 
-// Get new cart count
+
 $countRes = mysqli_query($conn, "SELECT SUM(quantity) as total FROM cart WHERE userId = $userId");
 $countRow = mysqli_fetch_assoc($countRes);
 $total = $countRow['total'] ?? 0;
